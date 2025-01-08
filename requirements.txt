@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+asyncio
+aiohttp
+bs4
+urllib3
+pydantic
+trafilatura
