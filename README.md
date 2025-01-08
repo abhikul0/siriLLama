@@ -36,6 +36,8 @@ siriLLama/
    **OR**
    use the run.cmd/run.sh
 
+## Siri Shortcut
+   https://www.icloud.com/shortcuts/dc4fc0a6edbd4813af5ad456e3eb9623
 ## Endpoints:
    - /api/tags: List models available locally.
    - /api/chat: Generate a chat completion.
