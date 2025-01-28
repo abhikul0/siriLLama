@@ -15,11 +15,6 @@ from concurrent.futures import ThreadPoolExecutor
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# datetime object containing current date and time
-now = datetime.now()
-# dd/mm/YY H:M:S
-dateTime = now.strftime("%d/%m/%Y %H:%M:%S")
-
 SEARXNG_URL = "http://localhost:4000/search"  # Adjust this URL to your SearXng instance
 LLM_ENDPOINT = "http://localhost:11434"  # Adjust this URL to your LLM endpoint
 
@@ -128,8 +123,13 @@ async def search_xng(query, session):
                 "content": content
             })
         
+        # datetime object containing current date and time
+        now = datetime.now()
+        # dd/mm/YY H:M:S
+        dateTime = now.strftime("%d/%m/%Y %H:%M:%S")
+        
         # Prepare the prompt for the LLM
-        prompt = f"""You are a web research assistant. Answer the following question based on the provided sources denoted by <id[number]>. Always cite your sources with the <id[number]> AND url used. If the Question is answerable in a short sentence, do that.
+        prompt = f"""You are a web research assistant. Answer the following question based on the provided sources denoted by <id[number]>. Always cite your sources with the <id[number]> AND <url> used from the sources. If the Question is answerable in a short sentence, do that.
         If you have knowledge to supplement the answer, do it but don't do it if that knowledge is not current. Keep in mind that the current date and time is {dateTime}.\n\nQuestion: {query}\n\nSources:\n"""
         for result in results:
             prompt += f"id:[{result['number']}.] - url:{result['url']}\ncontent:{result['content']}\n\n"
